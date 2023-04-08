@@ -40,6 +40,23 @@ data "archive_file" "lambda" {
   output_path = "view_counter_function_payload.zip"
 }
 
+// S3 bucket in which we're gonna release our versioned zip archives
+resource "aws_s3_bucket" "api_bucket" {
+  bucket        = "view-counter-api-bucket-42"
+  force_destroy = true
+}
+
+/*
+ * The first archive is uploaded through Terraform
+ * The following ones will be uploaded by our CI/CD. pipeline in GitHub actions
+ */
+resource "aws_s3_bucket_object" "api_code_archive" {
+  bucket = aws_s3_bucket.api_bucket.id
+  key    = "view_counter.zip"
+  source = data.archive_file.lambda.output_path
+  etag   = filemd5(data.archive_file.lambda.output_path)
+}
+
 resource "aws_lambda_function" "test_lambda" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
