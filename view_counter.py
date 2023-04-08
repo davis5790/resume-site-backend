@@ -1,4 +1,4 @@
-import json, boto3
+import boto3
 
 client = boto3.client('dynamodb')
 TableName = 'Resume-Website-Stats'
