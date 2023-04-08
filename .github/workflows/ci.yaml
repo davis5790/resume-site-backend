@@ -52,7 +52,7 @@ jobs:
       - name: Update lambda function code
         run: aws lambda update-function-code --function-name view_counter --s3-bucket view-counter-api-bucket-42 --s3-key ${{ github.run_id }}.zip
 
-      - name: Sleeps for 5 seconds
+      - name: Sleep for 5 seconds
         run: sleep 5s
         shell: bash
 
