@@ -39,6 +39,6 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::606026656431:role/github-actions-role
 
-      - name: tests with pytest
+      - name: test with pytest
         run: |
           pytest tests.py
