@@ -30,3 +30,7 @@ jobs:
       - name: Lint Python files with ruff
         run: |
           ruff check *.py
+      
+      - name: test with pytest
+        run: |
+          pytest tests.py
