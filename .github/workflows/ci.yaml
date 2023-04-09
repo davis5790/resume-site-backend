@@ -48,6 +48,14 @@ jobs:
     needs: [Quality-Assurance]
     steps:
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::606026656431:role/github-actions-role
+
       - name: Check out repository code
         uses: actions/checkout@v3
 
