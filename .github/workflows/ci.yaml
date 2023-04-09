@@ -48,6 +48,9 @@ jobs:
     needs: [Quality-Assurance]
     steps:
 
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
       - name: ZIP build
         run: zip ${{ github.run_id }}.zip view_counter.py
 
