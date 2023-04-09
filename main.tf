@@ -7,6 +7,7 @@ module "s3" {
   source      = "./modules/s3"
   bucket-name = "view-counter-api-bucket-42"
   archive-output-path = module.lambda.lambda-output-path
+  bucket-policy-iam-role = module.iam.lambda-role
 }
 
 module "lambda" {

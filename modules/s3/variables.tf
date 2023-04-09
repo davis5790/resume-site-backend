@@ -6,3 +6,7 @@ variable "bucket-name" {
 variable "archive-output-path" {
   default = ""
 }
+
+variable "bucket-policy-iam-role" {
+  default = ""
+}
