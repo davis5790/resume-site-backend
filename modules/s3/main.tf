@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "allow_PutObject" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = [var.bucket-policy-iam-role.arn]
+      identifiers = [var.bucket-policy-iam-role]
     }
 
     actions = [
