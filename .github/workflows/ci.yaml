@@ -22,14 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff pytest boto3
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-
-      - name: Lint Python files with ruff
-        run: |
-          ruff check *.py
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -39,9 +31,25 @@ jobs:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::606026656431:role/github-actions-role
 
+  Quality-Assurance:
+    needs: Build        
+    steps:
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Lint Python files with ruff
+        run: |
+          ruff check *.py
+
       - name: test with pytest
         run: |
           pytest tests.py
+
+  Deploy:
+    needs: [Build, Quality-Assurance]
+    steps:
 
       - name: ZIP build
         run: zip ${{ github.run_id }}.zip view_counter.py
