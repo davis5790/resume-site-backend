@@ -32,6 +32,7 @@ jobs:
           role-to-assume: arn:aws:iam::606026656431:role/github-actions-role
 
   Quality-Assurance:
+    runs-on: ubuntu-latest
     needs: Build        
     steps:
 
@@ -48,6 +49,7 @@ jobs:
           pytest tests.py
 
   Deploy:
+    runs-on: ubuntu-latest
     needs: [Build, Quality-Assurance]
     steps:
 
