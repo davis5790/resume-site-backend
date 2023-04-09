@@ -7,13 +7,13 @@ module "s3" {
   source      = "./modules/s3"
   bucket-name = "view-counter-api-bucket-42"
   archive-output-path = module.lambda.lambda-output-path
-  bucket-policy-iam-role = module.iam.lambda-role-arn
+  bucket-policy-iam-role = module.lambda.lambda-role-arn
 }
 
 module "lambda" {
   source = "./modules/lambda"
-  assume-role-policy = module.iam.assume-role
-  lambda-policy = module.iam.lambda-role
+  assume-role-policy = jsondecode(file("./modules/iam/assume-policy.json"))
+  lambda-policy = jsondecode(file("./modules/iam/view-count-policy.json"))
 }
 
 module "api" {

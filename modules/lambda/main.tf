@@ -1,22 +1,12 @@
 resource "aws_iam_role" "iam_for_lambda" {
   name = var.iam-role-name
-  assume_role_policy = jsonencode(var.assume-role-policy)
+  assume_role_policy = var.assume-role-policy
 }
 
 resource "aws_iam_role_policy" "lambda_policy" {
   name = var.lambda-policy-name
   role = aws_iam_role.iam_for_lambda.id
-  policy = jsonencode({Version = "2012-10-17"
-Statement = [{
-  Effect = "Allow",
-  Action = [
-    "logs:CreateLogGroup",
-    "logs:CreateLogStream",
-    "logs:PutLogEvents",
-    "dynamodb:UpdateItem"
-  ],
-  Resource = "*"
-}]})
+  policy = var.lambda-policy
 }
 
 data "archive_file" "lambda" {

@@ -13,3 +13,7 @@ output "lambda-alias-name" {
 output "lambda-output-path" {
     value = data.archive_file.lambda.output_path
 }
+
+output "lambda-role-arn" {
+    value = aws_iam_role.iam_for_lambda
+}
