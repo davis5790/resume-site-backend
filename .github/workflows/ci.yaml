@@ -45,7 +45,7 @@ jobs:
 
   Deploy:
     runs-on: ubuntu-latest
-    needs: [Build, Quality-Assurance]
+    needs: [Quality-Assurance]
     steps:
 
       - name: ZIP build
