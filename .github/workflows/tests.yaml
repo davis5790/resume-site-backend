@@ -1,4 +1,4 @@
-name: Resume Website Backend Pipeline
+name: Resume Website tests pipeline
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
