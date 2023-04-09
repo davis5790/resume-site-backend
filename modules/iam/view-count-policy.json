@@ -6,7 +6,8 @@
             "logs:CreateLogGroup",
             "logs:CreateLogStream",
             "logs:PutLogEvents",
-            "dynamodb:UpdateItem"
+            "dynamodb:UpdateItem",
+            "s3:PutObject"
         ],
         "Resource": "*"
     }]
