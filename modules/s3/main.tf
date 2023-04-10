@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "api_bucket" {
  * The first archive is uploaded through Terraform
  * The following ones will be uploaded by our CI/CD. pipeline in GitHub actions
  */
-resource "aws_s3_bucket_object" "api_code_archive" {
+resource "aws_s3_object" "api_code_archive" {
   bucket = aws_s3_bucket.api_bucket.id
   key    = "view_counter.zip"
   source = var.archive-output-path
