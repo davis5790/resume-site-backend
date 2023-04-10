@@ -5,7 +5,21 @@ variable "iam-role-name" {
 
 variable "assume-role-policy" {
     description = "lambda assume role policy"
-    default = ""
+    default = <<EOT
+    {
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  }
+  EOT
 }
 
 variable "lambda-policy-name" {
@@ -15,7 +29,24 @@ variable "lambda-policy-name" {
 
 variable "lambda-policy" {
     description = "the iam polity for the lambda function"
-    default = ""
+    default = <<EOT
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "dynamodb:UpdateItem",
+          "s3:PutObject"
+        ],
+        "Resource": "*"
+      }
+      ]
+    }
+    EOT
 }
 
 variable "archive-type" {

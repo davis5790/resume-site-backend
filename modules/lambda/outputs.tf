@@ -15,5 +15,5 @@ output "lambda-output-path" {
 }
 
 output "lambda-role-arn" {
-    value = aws_iam_role.iam_for_lambda
+    value = aws_iam_role.iam_for_lambda.arn
 }
